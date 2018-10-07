@@ -1,0 +1,19 @@
+ {% if error_message %}
+<p>
+    <strong>{{error_message}}</strong>
+</p>
+{% endif %}
+
+
+
+{% if companies_list %}
+<ul>
+    {% for company in companies_list %}
+    <li>
+        <a href="{% url 'companies:detail' company.id %}">{{ company.company_name }}</a>
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No companies are available.</p>
+{% endif %}

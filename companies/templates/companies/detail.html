@@ -1,0 +1,15 @@
+<h1>{{company.company_name}}</h1>
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<form action="{% url 'companies:apply' company.id %}" method="post">
+    {% csrf_token %}
+    <ul>
+        {% for job in company.job_set.all %}
+        <li> <a href="{{ job.job_url }}">{{ job.job_name }}</a></li>
+        <input type="checkbox" name="apply" id="job{{ forloop.counter }}" value="{{ job.id }}">
+        <label for="job{{ forloop.counter }}">{{ job.job_text }}</label><br>
+        {% endfor %}
+    </ul>
+    <input type="submit" value="Apply">
+</form>
